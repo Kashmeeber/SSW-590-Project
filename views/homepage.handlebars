@@ -17,22 +17,38 @@ the title set as the <title> element of the HTML document and as an h1 in your d
 
     }}
 
-
 <h1>
-    Venue Finder
+  Restaurants Quiz
 </h1>
 <main>
-    <p>
-        This website uses an API for Ticketmaster and allows you to search for venues 
-        based on a given term. It can also be used to look at details of a specific venue 
-        as well as send you to the Ticketmaster website if wanted.
-    </p>
-    <form method = "POST" action = "/searchvenues">
-        <label for = "inputID">
-            Input: 
-        </label>
-        <input type = "text" id = "inputID" name = "searchVenueTerm">
-        <input type = "submit" value = "Submit">
-    </form>
+  <p>
+    Trying to find a place to eat and can't decide? Take our quiz and we'll help you find the
+    perfect place! This quiz takes in your preferences to find the best restaurant for you!
+  </p>
+  <form action='/restaurantQuiz' method='POST'>
+    <label for='cuisine'>What type of food are you in the mood for?</label>
+    <input type='text' name='cuisine' id='cuisine' />
+    <label for='price'>What is your price range?</label>
+    <input type='radio' name='price' id='price' value='1' />$<br />
+    <input type='radio' name='price' id='price' value='2' />$$<br />
+    <input type='radio' name='price' id='price' value='3' />$$$<br />
+    <input type='radio' name='price' id='price' value='4' />$$$$<br />
+    <label for='location'>Where are you located?</label>
+    <input type='text' name='location' id='location' />
+    <label for="distance-from-location">How far are you willing to travel?</label>
+    <input type="number" name="distance-from-location" id="distance-from-location" />
+    <label for="open">Do you want to filter for restaurants that are open now?</label>
+    <input type="radio">Yes</input>
+    <input type="radio">No</input>
+    <label for="number-of-options">How many options do you want displayed?</label>
+    <input type="number" name="number-of-options" id="number-of-options" />
+    <label for="sort-by">How do you want to sort the results?</label>
+    <select name="sort-by" id="sort-by">
+      <option value="best_match">Best Match</option>
+      <option value="rating">Rating</option>
+      <option value="review_count">Review Count</option>
+      <option value="distance">Distance</option>
+    </select>
+    <input type='submit' value='Submit' />
+  </form>
 </main>
-    
