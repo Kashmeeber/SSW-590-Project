@@ -1,0 +1,54 @@
+/*This file should have CSS rulesets */
+p {
+    color: blue;
+    line-height: 1.5;
+    
+}
+
+h1 {
+    color: crimson;
+}
+
+#divColorBorder {
+	border-top: 3px solid silver;
+	border-bottom: 2px solid silver;
+	border-right: 2px solid rosybrown;
+	border-left: 3px solid rosybrown;
+}
+
+div {
+    text-align: center;
+    line-height: 1.5;
+    font-style: normal;
+}
+
+a:visited {
+	color: hotpink;
+}
+
+a:hover {
+    color: darkgoldenrod;
+}
+
+
+h2 {
+    color: limegreen;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input {
+    text-align: center;
+}
+
+body {
+    background-color: aquamarine;
+}
+
+label {
+    color: steelblue;
+}
