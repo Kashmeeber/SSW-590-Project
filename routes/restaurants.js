@@ -12,12 +12,10 @@ router.route('/').get(async (req, res) => {
 router.route('/restaurantResults').post(async (req, res) => {
   //code here for POST
   if (!req.body.searchVenueTerm || req.body.searchVenueTerm.trim() === '') {
-    return res
-      .status(400)
-      .render('../views/error', {
-        title: 'Error: 400',
-        error: 'Error 400: No input text was given into the form.'
-      });
+    return res.status(400).render('../views/error', {
+      title: 'Error: 400',
+      error: 'Error 400: No input text was given into the form.'
+    });
   }
   try {
     let ob = await getVenues(req.body.searchVenueTerm);
@@ -28,12 +26,10 @@ router.route('/restaurantResults').post(async (req, res) => {
       venues: venues
     });
   } catch (e) {
-    return res
-      .status(404)
-      .render('../views/venueNotFound', {
-        title: 'Error 404',
-        searchVenueTerm: req.body.searchVenueTerm
-      });
+    return res.status(404).render('../views/venueNotFound', {
+      title: 'Error 404',
+      searchVenueTerm: req.body.searchVenueTerm
+    });
   }
 });
 
@@ -47,12 +43,10 @@ router.route('/restaurantQuiz').get(async (req, res) => {
 router.route('/restaurantDetails/:id').get(async (req, res) => {
   //code here for GET
   if (!req.params.id || req.params.id.trim() === '') {
-    return res
-      .status(404)
-      .render('../views/error', {
-        title: 'Error 404',
-        error: 'Error 404: A venue with the given id does not exist.'
-      });
+    return res.status(404).render('../views/error', {
+      title: 'Error 404',
+      error: 'Error 404: A venue with the given id does not exist.'
+    });
   }
   try {
     let venue = await getVenueById(req.params.id);
@@ -133,12 +127,10 @@ router.route('/restaurantDetails/:id').get(async (req, res) => {
       address2: address2
     });
   } catch (e) {
-    return res
-      .status(404)
-      .render('../views/error', {
-        title: 'Error 404',
-        error: 'Error 404: A venue with the given id does not exist.'
-      });
+    return res.status(404).render('../views/error', {
+      title: 'Error 404',
+      error: 'Error 404: A venue with the given id does not exist.'
+    });
   }
 });
 
