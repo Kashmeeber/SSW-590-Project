@@ -1,0 +1,55 @@
+{{!
+
+This page will respond with a valid HTML document. The title of the document should be "Venue Finder". You should have
+the title set as the <title> element of the HTML document and as an h1 in your document.
+
+    Your page should reference a CSS file, /public/css/main-styles.css; this file should have at least 5 rulesets that
+    apply
+    to this page; these 5 rules can also apply to elements across all of your pages, or be unique to this page.
+
+    You should have a main element, and inside of the main element have a p element with a brief (2-3 sentence
+    description) of what your website does.
+
+    Also inside the main element, you will have a form; this form will POST to the /searchvenues route. This form will
+    have an input and a label; the label should properly reference the same id as the input using the for attribute. You
+    should also have an input with a type of submit that submits the form. The input in your form should have a name of
+    searchVenueTerm.
+
+    }}
+
+<title>Restaurants Quiz</title>
+<h1>
+  Restaurants Quiz
+</h1>
+<main>
+  <p>
+    Trying to find a place to eat and can't decide? Take our quiz and we'll help you find the
+    perfect place! This quiz takes in your preferences to find the best restaurant for you!
+  </p>
+  <form action='/restaurantQuiz' method='POST'>
+    <label for='cuisine'>What type of food are you in the mood for?</label><br />
+    <input type='text' name='cuisine' id='cuisine' /><br /><br />
+    <label for='price'>What is your price range?</label><br />
+    <input type='radio' name='price' id='price' value='1' />$<br />
+    <input type='radio' name='price' id='price' value='2' />$$<br />
+    <input type='radio' name='price' id='price' value='3' />$$$<br />
+    <input type='radio' name='price' id='price' value='4' />$$$$<br /><br />
+    <label for='location'>Where are you located?</label><br />
+    <input type='text' name='location' id='location' /><br /><br />
+    <label for="distance-from-location">How far are you willing to travel?</label><br />
+    <input type="number" name="distance-from-location" id="distance-from-location" /><br /><br />
+    <label for="open">Do you want to filter for restaurants that are open now?</label><br />
+    <input type="radio">Yes</input><br />
+    <input type="radio">No</input><br /><br />
+    <label for="number-of-options">How many options do you want displayed?</label><br />
+    <input type="number" name="number-of-options" id="number-of-options" /><br /><br />
+    <label for="sort-by">How do you want to sort the results?</label><br />
+    <select name="sort-by" id="sort-by">
+      <option value="best_match">Best Match</option><br />
+      <option value="rating">Rating</option><br />
+      <option value="review_count">Review Count</option><br />
+      <option value="distance">Distance</option><br /><br />
+    </select>
+    <input type='submit' value='Submit' />
+  </form>
+</main>
