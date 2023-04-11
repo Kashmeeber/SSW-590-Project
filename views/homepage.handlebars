@@ -1,54 +1,9 @@
-{{!
-
-This page will respond with a valid HTML document. The title of the document should be "Venue Finder". You should have
-the title set as the <title> element of the HTML document and as an h1 in your document.
-
-    Your page should reference a CSS file, /public/css/main-styles.css; this file should have at least 5 rulesets that
-    apply
-    to this page; these 5 rules can also apply to elements across all of your pages, or be unique to this page.
-
-    You should have a main element, and inside of the main element have a p element with a brief (2-3 sentence
-    description) of what your website does.
-
-    Also inside the main element, you will have a form; this form will POST to the /searchvenues route. This form will
-    have an input and a label; the label should properly reference the same id as the input using the for attribute. You
-    should also have an input with a type of submit that submits the form. The input in your form should have a name of
-    searchVenueTerm.
-
-    }}
-
-<h1>
-  Restaurants Quiz
-</h1>
+<title>Food Me Please</title>
+<h1>Food Me Please</h1>
 <main>
-  <p>
-    Trying to find a place to eat and can't decide? Take our quiz and we'll help you find the
-    perfect place! This quiz takes in your preferences to find the best restaurant for you!
+  <p>This application helps users decide where to eat. There is a quick quiz that takes in their
+    preferences to determine their ideal restaurant. The user can also search for restaurants by
+    name, location, and price range. There is an interactive chat-bot that can assist users in
+    various ways.
   </p>
-  <form action='/restaurantQuiz' method='POST'>
-    <label for='cuisine'>What type of food are you in the mood for?</label>
-    <input type='text' name='cuisine' id='cuisine' />
-    <label for='price'>What is your price range?</label>
-    <input type='radio' name='price' id='price' value='1' />$<br />
-    <input type='radio' name='price' id='price' value='2' />$$<br />
-    <input type='radio' name='price' id='price' value='3' />$$$<br />
-    <input type='radio' name='price' id='price' value='4' />$$$$<br />
-    <label for='location'>Where are you located?</label>
-    <input type='text' name='location' id='location' />
-    <label for="distance-from-location">How far are you willing to travel?</label>
-    <input type="number" name="distance-from-location" id="distance-from-location" />
-    <label for="open">Do you want to filter for restaurants that are open now?</label>
-    <input type="radio">Yes</input>
-    <input type="radio">No</input>
-    <label for="number-of-options">How many options do you want displayed?</label>
-    <input type="number" name="number-of-options" id="number-of-options" />
-    <label for="sort-by">How do you want to sort the results?</label>
-    <select name="sort-by" id="sort-by">
-      <option value="best_match">Best Match</option>
-      <option value="rating">Rating</option>
-      <option value="review_count">Review Count</option>
-      <option value="distance">Distance</option>
-    </select>
-    <input type='submit' value='Submit' />
-  </form>
 </main>

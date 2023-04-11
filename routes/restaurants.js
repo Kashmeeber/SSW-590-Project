@@ -36,7 +36,7 @@ router.route('/restaurantResults').post(async (req, res) => {
 // restaurant quiz page
 router.route('/restaurantQuiz').get(async (req, res) => {
   //code here for GET
-  return res.render('../views/homepage', { title: 'Restaurant Quiz' });
+  return res.render('../views/quiz', { title: 'Restaurant Quiz' });
 });
 
 // restaurant details page
