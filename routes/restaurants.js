@@ -41,6 +41,35 @@ router.route('/restaurantQuiz').get(async (req, res) => {
 });
 
 // restaurant details page
+router.route('/restaurantDetails/:id').get(async (req, res) => {
+  if (!req.params.id || req.params.id.trim() === '') {
+    return res.status(404).render('../views/error', {
+      title: 'Error 404',
+      error: 'Error 404: A restaurant with the given id does not exist.'
+    });
+  }
+  try {
+    let restaurant = await getRestaurantById(req.params.id);
+    let name = 'N/A';
+    if (Object.keys(restaurant).includes('name')) {
+      name = restaurant.name;
+      if (name.trim() === '' || !name) {
+        name = 'N/A';
+      }
+    }
+    return res.render('../views/restaurantDetails', {
+      title: 'Restaurant Details',
+      name: name,
+      restaurant: restaurant
+    });
+  } catch (e) {
+    return res.status(404).render('../views/error', {
+      title: 'Error 404',
+      error: 'Error 404: A restaurant with the given id does not exist.'
+    });
+  }
+});
+
 // router.route('/restaurantDetails/:id').get(async (req, res) => {
 //code here for GET
 // if (!req.params.id || req.params.id.trim() === '') {
