@@ -6,7 +6,7 @@ import { restaurants } from '../config/mongoCollections.js';
 // homepage : includes a search for restaurants and tabs at the top
 router.route('/').get(async (req, res) => {
   //code here for GET
-  return res.render('../views/homepage', { title: 'Restaurant Finder' });
+  return res.render('../views/homepage', { title: 'Food Me Please' });
 });
 
 // search results page
