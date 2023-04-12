@@ -20,33 +20,35 @@ the title set as the <title> element of the HTML document and as an h1 in your d
     }}
 
 <h1>
-    Venue Details
+  Restaurants Details
 </h1>
 <main>
-    <div>
-        <h2>
-            {{name}}
-        </h2>
-        {{#if src}}
-        <img alt = "{{name}}" src = {{src}}>
-        {{else}}
-        <img alt = "{{name}}" src = "../public/images/No_Image_Available.jpg">
-        {{/if}}
-        <br>
-        {{#if website}}
-        <a target = "_blank" href = {{website}}>
-            Venue Information on Ticketmaster
-        </a>
-        {{else}}
-        <p>
-            N/A
-        </p>
-        {{/if}}
-        <address>
-            Address: {{{address1}}}
-        </address>
-        <address>
-            Phone: {{{address2}}}
-        </address>
-    </div>
+  <div>
+    <h2>
+      {{name}}
+    </h2>
+    {{#if src}}
+      <img alt='{{name}}' src={{src}} />
+    {{else}}
+      <img alt='{{name}}' src='../public/images/No_Image_Available.jpg' />
+    {{/if}}
+    <br />
+    {{#if website}}
+      <a target='_blank' href={{website}}>
+        restaurant information
+      </a>
+    {{else}}
+      <p>
+        N/A
+      </p>
+    {{/if}}
+    <address>
+      Address:
+      {{{address1}}}
+    </address>
+    <address>
+      Phone:
+      {{{address2}}}
+    </address>
+  </div>
 </main>
