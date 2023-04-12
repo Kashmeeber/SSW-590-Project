@@ -36,13 +36,13 @@ the title set as the <title> element of the HTML document and as an h1 in your d
     <input type='radio' name='price' id='price' value='4' />$$$$<br /><br />
     <label for='location'>Where are you located?</label><br />
     <input type='text' name='location' id='location' /><br /><br />
-    <label for="distance-from-location">How far are you willing to travel?</label><br />
-    <input type="number" name="distance-from-location" id="distance-from-location" /><br /><br />
+    <label for="distance-from-location">How far are you willing to travel? (in miles)</label><br />
+    <input type="number" name="distance-from-location" id="distance-from-location" min="0"/><br /><br />
     <label for="open">Do you want to filter for restaurants that are open now?</label><br />
     <input type="radio">Yes</input><br />
     <input type="radio">No</input><br /><br />
-    <label for="number-of-options">How many options do you want displayed?</label><br />
-    <input type="number" name="number-of-options" id="number-of-options" /><br /><br />
+    <label for="number-of-options">How many options do you want to display?</label><br />
+    <input type="number" name="number-of-options" id="number-of-options" min="0" max="50"/><br /><br />
     <label for="sort-by">How do you want to sort the results?</label><br />
     <select name="sort-by" id="sort-by">
       <option value="best_match">Best Match</option><br />
