@@ -1,7 +1,6 @@
 import { Router } from 'express';
 const router = Router();
-import {  getRestaurants, getLocation, getRestaurantById } from '../helpers.js';
-import { restaurants } from '../config/mongoCollections.js';
+import {  getRestaurants, getRestaurantById, getRestaurantsQuiz } from '../helpers.js';
 
 // homepage : includes a search for restaurants and tabs at the top
 router.route('/').get(async (req, res) => {
@@ -36,20 +35,6 @@ router.route('/restaurantResults').post(async (req, res) => {
       error: e
     });
   }
-  // try {
-  //   let restaurant = await getRestaurants(req.body.searchRestaurant);
-  //   let restaurantList = restaurant._embedded.businesses;
-  //   return res.render('../views/restaurantSearchResults', {
-  //     title: "Here's What We Found...",
-  //     searchRestaurant: req.body.searchRestaurant,
-  //     restaurants: restaurantList
-  //   });
-  // } catch (e) {
-  //   return res.status(404).render('../views/restaurantNotFound', {
-  //     title: 'Restaurant Not Found',
-  //     searchRestaurant: req.body.searchRestaurant
-  //   });
-  // }
 });
 
 // restaurant quiz page
@@ -59,7 +44,48 @@ router.route('/restaurantQuiz').get(async (req, res) => {
 });
 
 // restaurant quiz results page
-router.route('/restaurantQuizResults').post(async (req, res) => {});
+router.route('/restaurantQuizResults').post(async (req, res) => {
+  if (!req.body.cuisine || !req.body.price || !req.body.location || !req.body.distance || !req.body.open || !req.body.numOptions || !req.body.sort_by ||
+    req.body.cuisine.trim() === '' || req.body.location.trim() === '') {
+      return res.status(404).render('../views/quiz', {
+        title: 'Error 400',
+        error: 'Error 400: Missing inputs given'
+      })
+  } 
+  if ( req.body.distance < 0 ) {
+    return res.status(404).render('../views/quiz', {
+      title: 'Error 400',
+      error: 'Error 400: Distance must be greater than 0'
+    });
+  }
+  if (req.body.numOptions < 0 || req.body.numOptions > 50) {
+    return res.status(404).render('../views/quiz', {
+      title: 'Error 400',
+      error: 'Error 400: The number of options to be displayed must be between 0 and 50.'
+    });
+  }
+  let cuisine = req.body.cuisine.trim();
+  let price = req.body.price;
+  let location = req.body.location.trim();
+  let distance = req.body.distance * 1609.34;
+  distance = distance.toFixed(0);
+  let open = req.body.open;
+  let numOptions = req.body.numOptions;
+  let sort_by = req.body.sort_by;
+  try {
+    let restaurants = await getRestaurantsQuiz(location, sort_by, numOptions, price, open, distance, cuisine);
+    return res.render('../views/restaurantQuizResults', {
+      title: "Here's What We Found...",
+      searchName: req.body.searchName,
+      restaurants: restaurants
+    });
+  } catch (e) {
+    return res.status(404).render('../views/error', {
+      title: 'Error 404',
+      error: 'Error 404: A restaurant with the given id does not exist.'
+    });
+  }
+});
 
 // restaurant details page
 router.route('/restaurantDetails/:id').get(async (req, res) => {
@@ -78,10 +104,105 @@ router.route('/restaurantDetails/:id').get(async (req, res) => {
         name = 'N/A';
       }
     }
-    return res.render('../views/restaurantDetails', {
+
+    let image = null;
+    if (Object.keys(restaurant).includes('image_url')) {
+      image = restaurant.image_url;
+      if (image.trim() === '' || !image) {
+        image = null;
+      }
+    }
+
+    let website = 'N/A';
+    if (Object.keys(restaurant).includes('url')) {
+      website = restaurant.url;
+      if (website.trim() === '' || !website) {
+        website = 'N/A';
+      }
+    }
+
+    let price = 'N/A';
+    if (Object.keys(restaurant).includes('price')) {
+      price = restaurant.price;
+      if (price.trim() === '' || !price) {
+        price = 'N/A';
+      }
+    }
+
+    let address = 'N/A';
+    let address2 = 'N/A;'
+    if (Object.keys(restaurant).includes('location') && Object.keys(restaurant.location).includes('display_address')) {
+      address = restaurant.location.display_address[0];
+      if (restaurant.location.display_address.length > 1) {
+        address2 = restaurant.location.display_address[1];
+      }
+      if (address.trim() === '' || !address) {
+        address = 'N/A';
+      }
+      if (address2.trim() === '' || !address2) {
+        address2 = 'N/A';
+      }
+    }
+
+    let phone = 'N/A';
+    if (Object.keys(restaurant).includes('display_phone')) {
+      phone = restaurant.display_phone;
+      if (phone.trim() === '' || !phone) {
+        phone = 'N/A';
+      }
+    }
+
+    let rating = 'N/A';
+    let rating_image = null;
+    if (Object.keys(restaurant).includes('rating')) {
+      rating = restaurant.rating;
+    }
+    if (rating === "N/A") {
+      rating_image = '../public/images/No_Image_Available.jpg'
+    } else if (rating === 0) {
+      rating_image = '../public/images/regular/regular_0.png'
+    } else if (rating === 1) {
+      rating_image = '../public/images/regular/regular_1.png'
+    } else if (rating === 1.5) {
+      rating_image = '../public/images/regular/regular_1_half.png'
+    } else if (rating === 2) {
+      rating_image = '../public/images/regular/regular_2.png'
+    } else if (rating === 2.5) {
+      rating_image = '../public/images/regular/regular_2_half.png'
+    } else if (rating === 3) {
+      rating_image = '../public/images/regular/regular_3.png'
+    } else if (rating === 3.5) {
+      rating_image = '../public/images/regular/regular_3_half.png'
+    } else if (rating === 4) {
+      rating_image = '../public/images/regular/regular_4.png'
+    } else if (rating === 4.5) {
+      rating_image = '../public/images/regular/regular_4_half.png'
+    } else if (rating === 5) {
+      rating_image = '../public/images/regular/regular_5.png'
+    }
+    
+    let is_closed = 'N/A';
+    if (Object.keys(restaurant).includes('is_closed')) {
+      is_closed = restaurant.is_closed;
+    }
+
+    if (is_closed === false) {
+      is_closed = "Is open right now";
+    } else { 
+      is_closed = "Is closed right now";
+    }
+    
+    return res.render('../views/restaurantByID', {
       title: 'Restaurant Details',
       name: name,
-      restaurant: restaurant
+      image: image, 
+      website: website,
+      address: address,
+      address2: address2,
+      phone: phone,
+      price: price,
+      rating_image: rating_image,
+      is_closed: is_closed
     });
   } catch (e) {
     return res.status(404).render('../views/error', {
@@ -90,99 +211,5 @@ router.route('/restaurantDetails/:id').get(async (req, res) => {
     });
   }
 });
-
-// router.route('/restaurantDetails/:id').get(async (req, res) => {
-//code here for GET
-// if (!req.params.id || req.params.id.trim() === '') {
-//   return res.status(404).render('../views/error', {
-//     title: 'Error 404',
-//     error: 'Error 404: A restaurant with the given id does not exist.'
-//   });
-// }
-// try {
-//   let venue = await getRestaurantById(req.params.id);
-//   let name = 'N/A';
-//   if (Object.keys(venue).includes('name')) {
-//     name = restaurants.name;
-//     if (name.trim() === '' || !name) {
-//       name = 'N/A';
-//     }
-//   }
-
-//   let src = null;
-//   if (Object.keys(venue).includes('images')) {
-//     src = restaurants.images[0].url;
-//     if (src.trim() === '' || !src) {
-//       src = null;
-//     }
-//   }
-//   let website = null;
-//   if (Object.keys(venue).includes('url')) {
-//     website = restaurants.url;
-//     if (website.trim() === '' || !website) {
-//       website = null;
-//     }
-//   }
-
-//   let address1a = 'N/A';
-//   if (Object.keys(venue).includes('address') && Object.keys(venue.address).includes('line1')) {
-//     address1a = restaurants.address.line1;
-//     if (address1a.trim() === '' || !address1a) {
-//       address1a = 'N/A';
-//     }
-//   }
-
-//   let address1b = 'N/A';
-//   if (Object.keys(venue).includes('city') && Object.keys(venue.city).includes('name')) {
-//     address1b = restaurants.city.name;
-//     if (address1b.trim() === '' || !address1b) {
-//       address1b = 'N/A';
-//     }
-//   }
-
-//   let address1c = 'N/A';
-//   if (Object.keys(venue).includes('state') && Object.keys(venue.state).includes('stateCode')) {
-//     address1c = venue.state.stateCode;
-//     if (address1c.trim() === '' || !address1c) {
-//       address1c = 'N/A';
-//     }
-//   }
-
-//   let address1d = 'N/A';
-//   if (Object.keys(venue).includes('postalCode')) {
-//     address1d = venue.postalCode;
-//     if (address1d.trim() === '' || !address1d) {
-//       address1d = 'N/A';
-//     }
-//   }
-
-//   let address1 = `${address1a}, ${address1b}, ${address1c}, ${address1d}`;
-
-//   let address2 = 'N/A';
-//   if (
-//     Object.keys(venue).includes('boxOfficeInfo') &&
-//     Object.keys(venue.boxOfficeInfo).includes('phoneNumberDetail')
-//   ) {
-//     address2 = venue.boxOfficeInfo.phoneNumberDetail;
-//     if (address2.trim() === '' || !address2) {
-//       address2 = 'N/A';
-//     }
-//   }
-
-//   return res.render('../views/venueByID', {
-//     title: 'Venue Details',
-//     name: name,
-//     src: src,
-//     website: website,
-//     address1: address1,
-//     address2: address2
-//   });
-// } catch (e) {
-//   return res.status(404).render('../views/error', {
-//     title: 'Error 404',
-//     error: 'Error 404: A venue with the given id does not exist.'
-//   });
-// }
-// });
 
 export default router;

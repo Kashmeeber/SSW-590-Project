@@ -1,0 +1,18 @@
+<h1>
+  Quiz Results
+</h1>
+<h2>
+{{{searchName}}}
+</h2>
+<main>
+<ol>
+    {{#each restaurants}}
+    <li>
+    <a href='/restaurantDetails/{{id}}'>{{name}}</a>
+    </li>
+    {{/each}}
+</ol>
+<a href='/'>
+    Make another search
+</a>
+</main>
