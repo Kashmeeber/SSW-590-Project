@@ -1,6 +1,6 @@
 import { Router } from 'express';
 const router = Router();
-import { /* getRestaurants*/ getLocation, getRestaurantById } from '../helpers.js';
+import {  getRestaurants, getLocation, getRestaurantById } from '../helpers.js';
 import { restaurants } from '../config/mongoCollections.js';
 
 // homepage : includes a search for restaurants and tabs at the top
@@ -13,23 +13,22 @@ router.route('/').get(async (req, res) => {
 router.route('/restaurantResults').post(async (req, res) => {
   //code here for POST
   if (
-    // !req.body.searchRestaurant ||
-    // req.body.searchRestaurant.trim() === '' ||
+    !req.body.searchName || 
+    req.body.searchName.trim() === '' ||
     !req.body.searchLocation ||
     req.body.searchLocation.trim() === ''
   ) {
     return res.status(404).render('../views/error', {
       title: 'Error 400',
-      error: 'Error 400: No search terms were given.'
+      error: 'Error 400: Missing search term.'
     });
   }
   try {
-    let location = await getLocation(req.body.searchLocation);
-    let locationList = location._embedded.businesses;
-    return res.render('../views/locationSearchResults', {
+    let restaurants = await getRestaurants(req.body.searchLocation, req.body.searchName);
+    return res.render('../views/restaurantSearchResults', {
       title: "Here's What We Found...",
-      searchLocation: req.body.searchLocation,
-      locations: locationList
+      searchLocation: req.body.searchName,
+      restaurants: restaurants
     });
   } catch (e) {
     return res.status(404).render('../views/error', {

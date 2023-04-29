@@ -13,36 +13,31 @@ const checkIsProperNumber = (val, variable) => {
   }
 };
 
-// const getRestaurants = async (searchTerms) => {
-//   try {
-//     // let { data } = await axios.get('https://api.yelp.com/v3/businesses/search', {
-//     //   headers: {
-//     //     Authorization: `Bearer ${APIKEY}`
-//     //   },
-//     //   params: searchTerms
-//     // });
-//     // return data;
-//     const options = {
-//       method: 'GET',
-//       url: 'https://api.yelp.com/v3/businesses/search?' + searchTerms,
-//       params: searchTerms,
-//       headers: {
-//         Authorization: `Bearer ${APIKEY}`
-//       }
-//     };
-//     // let { data } = await axios.request(options);
-//     // return data;
-//     await axios.request(options, function (error, response) {
-//       if (error) throw new Error(error);
-//       console.log(response.data);
-//       return response.data;
-//     });
-//   } catch (e) {
-//     if (e.code === 'ENOTFOUND') throw 'Error: Invalid URL';
-//     else if (e.response) throw `Error: ${e.response.status}: ${e.response.statusText}`;
-//     else throw `Error: ${e}`;
-//   }
-// };
+const getRestaurants = async (area, name) => {
+  const myURL =new URL('https://api.yelp.com/v3/businesses/search?');
+  myURL.searchParams.append('location', area);
+  myURL.searchParams.append('term', name);
+  myURL.searchParams.append('sort_by', 'best_match');
+  myURL.searchParams.append('limit', '20');
+  const options = {
+    method: 'GET',
+    url: myURL,
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${APIKEY}`
+    }
+  };
+  
+  let businesses = await axios
+    .request(options)
+    .then(function (response) {
+      return response.data.businesses;
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+    return businesses;
+}
 
 const getLocation = async (searchTerms) => {
   try {
@@ -85,7 +80,7 @@ const getRestaurantById = async (id) => {
 };
 
 export {
-  /* getRestaurants,*/ getRestaurantById,
+  getRestaurants, getRestaurantById,
   checkIsProperNumber,
   checkIsProperString,
   getLocation
