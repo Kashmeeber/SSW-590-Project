@@ -1,4 +1,3 @@
-
 <h1>Food Me Please</h1>
 <main>
   <p>This application helps users decide where to eat. There is a quick quiz that takes in their
@@ -7,7 +6,9 @@
     various ways.
   </p>
   <form action='/restaurantResults' method='POST'>
-    <label for='searchRestaurant'>Search for a restaurant by name or location</label><br />
-    <input type='text' name='searchRestaurant' id='searchRestaurant' /><br /><br />
+    {{! <label for='searchRestaurant'>Search for a restaurant by name</label><br />
+    <input type='text' name='searchRestaurant' id='searchRestaurant' /><br /><br /> }}
+    <label for='searchLocation'>Search for a restaurant by location</label><br />
+    <input type='text' name='searchLocation' id='searchLocation' /><br /><br />
     <input type='submit' value='Submit' />
 </main>

@@ -2,8 +2,6 @@ import { restaurants } from '../config/mongoCollections.js';
 import { ObjectId } from 'mongodb';
 import { checkIsProperString, checkIsProperNumber } from '../helpers.js';
 
-// Fix website : currently only takes in websites with https://www. and .com with a specific length in between
-
 const create = async (name, address, price, tags, website) => {
   if (!name || !address || !price || !tags || !website) {
     throw `Error: All fields need to have valid values`;
@@ -15,11 +13,7 @@ const create = async (name, address, price, tags, website) => {
   checkIsProperString(price, ' in price');
   price = price.trim();
   website = website.trim();
-  if (
-    website.toLowerCase().slice(0, 12) !== 'https://www.' ||
-    website.toLowerCase().slice(website.length - 4, website.length) !== '.com' ||
-    website.indexOf('.com') - (website.indexOf('https://www.') + 12) < 5
-  ) {
+  if (!/\S+@\S+\.\S+/.test(emailAddress)) {
     throw `Error: Invalid website given`;
   }
   if (!Array.isArray(tags.flat(Infinity)) || tags.length < 1) {

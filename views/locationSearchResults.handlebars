@@ -1,0 +1,18 @@
+<h1>
+    Restaurants Found Based on Location
+</h1>
+<h2>
+    {{{searchLocation}}}
+</h2>
+<main>
+    <ol>
+        {{#each location}}
+        <li>
+            <a href='/restaurantDetails/{{id}}'>{{name}}</a>
+        </li>
+        {{/each}}
+    </ol>
+    <a href='/'>
+        Make another search
+    </a>
+</main>

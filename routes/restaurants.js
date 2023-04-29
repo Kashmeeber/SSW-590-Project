@@ -1,6 +1,6 @@
 import { Router } from 'express';
 const router = Router();
-import { getRestaurants, getRestaurantById } from '../helpers.js';
+import { /* getRestaurants*/ getLocation, getRestaurantById } from '../helpers.js';
 import { restaurants } from '../config/mongoCollections.js';
 
 // homepage : includes a search for restaurants and tabs at the top
@@ -12,26 +12,45 @@ router.route('/').get(async (req, res) => {
 // search results page
 router.route('/restaurantResults').post(async (req, res) => {
   //code here for POST
-  if (!req.body.searchRestaurant || req.body.searchRestaurant.trim() === '') {
-    return res.status(400).render('../views/error', {
-      title: 'Error: 400',
-      error: 'Error 400: No input text was given into the form.'
+  if (
+    // !req.body.searchRestaurant ||
+    // req.body.searchRestaurant.trim() === '' ||
+    !req.body.searchLocation ||
+    req.body.searchLocation.trim() === ''
+  ) {
+    return res.status(404).render('../views/error', {
+      title: 'Error 400',
+      error: 'Error 400: No search terms were given.'
     });
   }
   try {
-    let ob = await getRestaurants(req.body.searchRestaurant);
-    let venues = ob._embedded.venues;
-    return res.render('../views/restaurantSearchResults', {
-      title: 'Restaurants Found',
-      searchRestaurant: req.body.searchRestaurant,
-      venues: venues
+    let location = await getLocation(req.body.searchLocation);
+    let locationList = location._embedded.businesses;
+    return res.render('../views/locationSearchResults', {
+      title: "Here's What We Found...",
+      searchLocation: req.body.searchLocation,
+      locations: locationList
     });
   } catch (e) {
-    return res.status(404).render('../views/restaurantNotFound', {
+    return res.status(404).render('../views/error', {
       title: 'Error 404',
-      searchRestaurant: req.body.searchRestaurant
+      error: e
     });
   }
+  // try {
+  //   let restaurant = await getRestaurants(req.body.searchRestaurant);
+  //   let restaurantList = restaurant._embedded.businesses;
+  //   return res.render('../views/restaurantSearchResults', {
+  //     title: "Here's What We Found...",
+  //     searchRestaurant: req.body.searchRestaurant,
+  //     restaurants: restaurantList
+  //   });
+  // } catch (e) {
+  //   return res.status(404).render('../views/restaurantNotFound', {
+  //     title: 'Restaurant Not Found',
+  //     searchRestaurant: req.body.searchRestaurant
+  //   });
+  // }
 });
 
 // restaurant quiz page
@@ -39,6 +58,9 @@ router.route('/restaurantQuiz').get(async (req, res) => {
   //code here for GET
   return res.render('../views/quiz', { title: 'Restaurant Quiz' });
 });
+
+// restaurant quiz results page
+router.route('/restaurantQuizResults').post(async (req, res) => {});
 
 // restaurant details page
 router.route('/restaurantDetails/:id').get(async (req, res) => {

@@ -13,15 +13,52 @@ const checkIsProperNumber = (val, variable) => {
   }
 };
 
-const getRestaurants = async (searchTerms) => {
+// const getRestaurants = async (searchTerms) => {
+//   try {
+//     // let { data } = await axios.get('https://api.yelp.com/v3/businesses/search', {
+//     //   headers: {
+//     //     Authorization: `Bearer ${APIKEY}`
+//     //   },
+//     //   params: searchTerms
+//     // });
+//     // return data;
+//     const options = {
+//       method: 'GET',
+//       url: 'https://api.yelp.com/v3/businesses/search?' + searchTerms,
+//       params: searchTerms,
+//       headers: {
+//         Authorization: `Bearer ${APIKEY}`
+//       }
+//     };
+//     // let { data } = await axios.request(options);
+//     // return data;
+//     await axios.request(options, function (error, response) {
+//       if (error) throw new Error(error);
+//       console.log(response.data);
+//       return response.data;
+//     });
+//   } catch (e) {
+//     if (e.code === 'ENOTFOUND') throw 'Error: Invalid URL';
+//     else if (e.response) throw `Error: ${e.response.status}: ${e.response.statusText}`;
+//     else throw `Error: ${e}`;
+//   }
+// };
+
+const getLocation = async (searchTerms) => {
   try {
-    let { data } = await axios.get('https://api.yelp.com/v3/businesses/search', {
+    const options = {
+      method: 'GET',
+      url: 'https://api.yelp.com/v3/businesses/search?location=Hoboken',
+      params: searchTerms,
       headers: {
         Authorization: `Bearer ${APIKEY}`
-      },
-      params: searchTerms
+      }
+    };
+    await axios.request(options, function (error, response) {
+      if (error) throw new Error(error);
+      console.log(response.data);
+      return response.data;
     });
-    return data;
   } catch (e) {
     if (e.code === 'ENOTFOUND') throw 'Error: Invalid URL';
     else if (e.response) throw `Error: ${e.response.status}: ${e.response.statusText}`;
@@ -47,4 +84,9 @@ const getRestaurantById = async (id) => {
   }
 };
 
-export { getRestaurants, getRestaurantById, checkIsProperNumber, checkIsProperString };
+export {
+  /* getRestaurants,*/ getRestaurantById,
+  checkIsProperNumber,
+  checkIsProperString,
+  getLocation
+};
