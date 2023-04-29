@@ -1,1 +1,1 @@
-export let APIKEY = `4YSLWqas_TdtmezjCf9vQeoSKTqOsm6f6VqGAt6LJmw9uXuEJ5w4724oBhMvmQDpPlVFeSmEyfzf0JAm2KT1HkKjlMHK_SFHB8DakDTmxbw9np8Z-_9dSIFznCE0ZHYx`;
+export let APIKEY = `Insert Yelp API Key Here`;
