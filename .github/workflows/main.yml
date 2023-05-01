@@ -19,5 +19,4 @@ jobs:
           node-version: 18.13.0
           cache: 'npm'
       - run: npm ci
-      - run: npm start
       - run: npm test
