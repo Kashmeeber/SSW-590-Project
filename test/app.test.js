@@ -49,20 +49,20 @@ describe('GET Route Endpoints', () =>
     expect(res.header['content-type']).toBe('text/html; charset=utf-8');
     // expect(res.text).toEqual();
   });
-  // test('GET /restaurantDetails/:id should return details about a specific restaurant', async () => {
-  //   const res = await supertest(app).get('/restaurantDetails/gt-0HkY2DC-NscmhOsKOWw');
-  //   // console.log(res);
-  //   expect(res.statusCode).toEqual(200);
-  //   expect(res.header['content-type']).toBe('text/html; charset=utf-8');
-  //   // expect(res.text).toBe();
-  // });
-  // test('GET /restaurantDetails/:id should give an error due to an invalid id', async () => {
-  //   const res = await supertest(app).get('/restaurantDetails/gt');
-  //   expect(res.statusCode).toEqual(404);
-  //   expect(res.header['content-type']).toBe('text/html; charset=utf-8');
-  //   console.log(res);
-  //   // expect(res.text).toBe();
-  // });
+  test('GET /restaurantDetails/:id should return details about a specific restaurant', async () => {
+    const res = await supertest(app).get('/restaurantDetails/gt-0HkY2DC-NscmhOsKOWw');
+    // console.log(res);
+    expect(res.statusCode).toEqual(200);
+    expect(res.header['content-type']).toBe('text/html; charset=utf-8');
+    // expect(res.text).toBe();
+  });
+  test('GET /restaurantDetails/:id should give an error due to an invalid id', async () => {
+    const res = await supertest(app).get('/restaurantDetails/gt');
+    expect(res.statusCode).toEqual(404);
+    expect(res.header['content-type']).toBe('text/html; charset=utf-8');
+    console.log(res);
+    // expect(res.text).toBe();
+  });
 });
 
 describe('POST Route Endpoints', () => 
