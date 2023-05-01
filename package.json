@@ -8,7 +8,7 @@
     "test": "jest",
     "start": "node app.js"
   },
-  "jest" {
+  "jest": {
     "collectCoverage": true
   },
   "author": "Areeb Chaudhry & Tamnhu Nguyen",
