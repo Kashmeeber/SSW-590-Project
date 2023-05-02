@@ -5,7 +5,9 @@
     name and location. There is an interactive chat-bot that can assist users in
     various ways.
   </p>
-  <form action='/restaurantResults' method='POST'>
+  <p id="serverError">{{{error}}}</p>
+  <div id="error" hidden></div>
+  <form action='/restaurantResults' method='POST' id="home-form">
     {{! <label for='searchRestaurant'>Search for a restaurant by name</label><br />
     <input type='text' name='searchRestaurant' id='searchRestaurant' /><br /><br /> }}
     <label for='searchLocation'>In what area do you want to search in?</label><br />

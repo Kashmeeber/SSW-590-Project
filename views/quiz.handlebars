@@ -6,8 +6,9 @@
     Trying to find a place to eat and can't decide? Take our quiz and we'll help you find the
     perfect place! This quiz takes in your preferences to find the best restaurants near you!
   </p>
-  <p class="error">{{{error}}}</p>
-  <form action='/restaurantQuizResults' method='POST'>
+  <p id="serverError">{{{error}}}</p>
+  <div id="error" hidden></div>
+  <form action='/restaurantQuizResults' method='POST' id="quiz-form">
     <label for='cuisine'>What type of food are you in the mood for?</label><br>
     <input type='text' name='cuisine' id='cuisine'><br><br>
 
@@ -27,8 +28,8 @@
     {{!-- <input type="radio" id="open1" value='true' name="open" checked>Yes<br>
     <input type="radio" id="open2" value='false' name="open">No<br><br> --}}
     <select name="open" id="open">
-      <option value="true">Yes</option>
-      <option value="false">No</option>
+      <option value="true" id="yes">Yes</option>
+      <option value="false" id="no">No</option>
     </select><br><br>
 
     <label for="numOptions">How many options do you want to display?</label><br>
@@ -42,5 +43,14 @@
     </select>
     <br><br>
     <input type='submit' value='Submit'>
+  </form>
+  <br />
+  <form id="chatbot-quiz-form">
+    <div id="chatbot-quiz-main" class="main">
+      <label for="question">Please select your question.</label><br><br>
+      <input type="radio" id="option1" name="option" value="option1" />How do I use this page?<br><br>
+      <input type="radio" id="option2" name="option" value="option2" />What if I don't know what I want to eat?<br><br>
+      <button onclick="homepageQuestion()">Submit</button>
+    </div>
   </form>
 </main>
