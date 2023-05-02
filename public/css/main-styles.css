@@ -50,3 +50,26 @@ body {
 label {
   color: steelblue;
 }
+
+#main {
+  border: 2px solid black;
+  position: absolute;
+  left: 50%;
+  background-color: lightgray;
+  text-align: center;
+  line-height: 1.5;
+  font-style: normal;
+  width: 25%;
+}
+
+#input {
+  text-align: center;
+}
+
+/* #chatbot {
+  text-align: center;
+}
+
+.hide {
+  display: none;
+} */
