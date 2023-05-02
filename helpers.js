@@ -33,10 +33,10 @@ const getRestaurants = async (area, name) => {
     .request(options)
     .then(function (response) {
       return response.data.businesses;
-    })
-    .catch(function (error) {
-      console.error(error);
     });
+    // .catch(function (error) {
+    //   console.error(error);
+    // });
     return businesses;
 }
 
@@ -66,10 +66,10 @@ const getRestaurantsQuiz = async (area, sort_by, limit, price, open_now, radius,
     .request(options)
     .then(function (response) {
       return response.data.businesses;
-    })
-    .catch(function (error) {
-      console.error(error);
     });
+    // .catch(function (error) {
+    //   console.error(error);
+    // });
     return businesses;
 }
 
@@ -87,10 +87,10 @@ const getRestaurantById = async (id) => {
     .request(options)
     .then(function (response) {
       return response.data;
-    })
-    .catch(function (error) {
-      console.error(error);
     });
+    // .catch(function (error) {
+    //   console.error(error);
+    // });
     return business;
 };
 

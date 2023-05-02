@@ -17,7 +17,7 @@ router.route('/restaurantResults').post(async (req, res) => {
     !req.body.searchLocation ||
     req.body.searchLocation.trim() === ''
   ) {
-    return res.status(404).render('../views/error', {
+    return res.status(400).render('../views/error', {
       title: 'Error 400',
       error: 'Error 400: Missing search term.'
     });
@@ -47,19 +47,19 @@ router.route('/restaurantQuiz').get(async (req, res) => {
 router.route('/restaurantQuizResults').post(async (req, res) => {
   if (!req.body.cuisine || !req.body.price || !req.body.location || !req.body.distance || !req.body.open || !req.body.numOptions || !req.body.sort_by ||
     req.body.cuisine.trim() === '' || req.body.location.trim() === '') {
-      return res.status(404).render('../views/quiz', {
+      return res.status(400).render('../views/quiz', {
         title: 'Error 400',
         error: 'Error 400: Missing inputs given'
       })
   } 
   if ( req.body.distance < 0 ) {
-    return res.status(404).render('../views/quiz', {
+    return res.status(400).render('../views/quiz', {
       title: 'Error 400',
       error: 'Error 400: Distance must be greater than 0'
     });
   }
   if (req.body.numOptions < 0 || req.body.numOptions > 50) {
-    return res.status(404).render('../views/quiz', {
+    return res.status(400).render('../views/quiz', {
       title: 'Error 400',
       error: 'Error 400: The number of options to be displayed must be between 0 and 50.'
     });
