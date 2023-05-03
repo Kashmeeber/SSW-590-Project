@@ -33,7 +33,7 @@ a:hover {
 }
 
 h2 {
-  color: limegreen;
+  color: rgb(2, 85, 2);
 }
 
 img {
@@ -60,7 +60,7 @@ label {
   color: crimson;
 }
 
-.main {
+/* .main {
   border: 2px solid black;
   position: absolute;
   left: 50%;
@@ -69,7 +69,7 @@ label {
   line-height: 1.5;
   font-style: normal;
   width: 25%;
-}
+} */
 
 .openChat {
   background-color: #555;
@@ -141,7 +141,7 @@ label {
   cursor: pointer;
   width: 100px;
   margin-bottom: 5px;
-  position: fixed;
+  /* position: fixed; */
   left: 30px;
   opacity: 0.8;
 }
