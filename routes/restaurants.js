@@ -24,15 +24,22 @@ router.route('/restaurantResults').post(async (req, res) => {
   }
   try {
     let restaurants = await getRestaurants(req.body.searchLocation, req.body.searchName);
-    return res.render('../views/restaurantSearchResults', {
+    if (restaurants.length === 0) {
+      return res.status(404).render('../views/error', {
+        title: 'Error 404',
+        error: "Error: Could not find any restaurants with given inputs"
+      });
+    } else {
+      return res.render('../views/restaurantSearchResults', {
       title: "Here's What We Found...",
       searchLocation: req.body.searchName,
       restaurants: restaurants
     });
+    }
   } catch (e) {
     return res.status(404).render('../views/error', {
       title: 'Error 404',
-      error: e
+      error: "Error: Could not find any restaurants with given inputs"
     });
   }
 });
@@ -74,11 +81,18 @@ router.route('/restaurantQuizResults').post(async (req, res) => {
   let sort_by = req.body.sort_by;
   try {
     let restaurants = await getRestaurantsQuiz(location, sort_by, numOptions, price, open, distance, cuisine);
-    return res.render('../views/restaurantQuizResults', {
+    if (restaurants.length === 0) {
+      return res.status(404).render('../views/error', {
+        title: 'Error 404',
+        error: 'Error 404: A restaurant with the given id does not exist.'
+      });
+    } else {
+      return res.render('../views/restaurantQuizResults', {
       title: "Here's What We Found...",
       searchName: req.body.searchName,
       restaurants: restaurants
     });
+    }
   } catch (e) {
     return res.status(404).render('../views/error', {
       title: 'Error 404',
