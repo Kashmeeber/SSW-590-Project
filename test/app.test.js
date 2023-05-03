@@ -505,7 +505,7 @@ describe('POST Route Endpoints', () =>
       location: "Jersey City",
       distance: 5,
       open: "true",
-      numOptions: 1,
+      numOptions: 3,
       sort_by: "best_match"
     });
     expect(res.statusCode).toEqual(200);
@@ -536,6 +536,12 @@ describe('POST Route Endpoints', () =>
     '<main>\r\n' +
     '<ol>\r\n' +
     '    <li>\r\n' +
+    "    <a href='/restaurantDetails/gt-0HkY2DC-NscmhOsKOWw'>The Hutton</a>\r\n" +
+    '    </li>\r\n' +
+    '    <li>\r\n' +
+    "    <a href='/restaurantDetails/_hvgCRW8Vw1n3Usr9RPoUg'>Cellar 335</a>\r\n" +
+    '    </li>\r\n' +
+    '    <li>\r\n' +
     "    <a href='/restaurantDetails/jc_XQPbSCwMHsXLfinXA6A'>Prince &amp; I</a>\r\n" +
     '    </li>\r\n' +
     '</ol>\r\n' +
@@ -545,7 +551,7 @@ describe('POST Route Endpoints', () =>
     '</main>\r\n' +
     '  </body>\r\n' +
     '\r\n' +
-    '</html>')
+    '</html>');
   });
   test('10: POST /restaurantQuizResults gives an error due to missing cuisine', async () => {
     const res = await supertest(app).post('/restaurantQuizResults').send({
