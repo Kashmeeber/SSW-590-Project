@@ -18,7 +18,6 @@ h1 {
   margin-right: 500px;
 }
 
-
 div {
   text-align: center;
   line-height: 1.5;
@@ -54,7 +53,7 @@ body {
 }
 
 label {
-  color: steelblue;
+  color: darkblue;
 }
 
 #serverError {
@@ -71,7 +70,6 @@ label {
   font-style: normal;
   width: 25%;
 }
-
 
 .openChat {
   background-color: #555;
@@ -97,9 +95,9 @@ label {
 
 .popup {
   visibility: hidden;
-  width: 345px;  
+  width: 345px;
   height: 400px;
-  padding: 0;  
+  padding: 0;
   position: fixed;
   bottom: 25px;
   right: 28px;
@@ -108,13 +106,13 @@ label {
 }
 
 .popup .btn {
-  background-color: #04AA6D;
+  background-color: #026f47;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
@@ -122,32 +120,32 @@ label {
   background-color: red;
 }
 
-.popup .btn:hover, .open:hover {
+.popup .btn:hover,
+.open:hover {
   opacity: 1;
 }
 
 #home-answer {
-  text-align: center
+  text-align: center;
 }
 
 #quiz-answer {
-  text-align: center
+  text-align: center;
 }
 
 .submitBtn {
-  
   background-color: cornflowerblue;
   color: white;
   padding: 5px 5px;
   border: none;
   cursor: pointer;
   width: 100px;
-  margin-bottom:5px;
+  margin-bottom: 5px;
   position: fixed;
   left: 30px;
   opacity: 0.8;
 }
 
-.submitBtn:hover{
+.submitBtn:hover {
   opacity: 1;
 }
