@@ -7,19 +7,19 @@
       {{name}}
     </h2>
     {{#if image}}
-      <img alt='{{name}}' src={{image}} />
+    <img alt='{{name}}' src={{image}} />
     {{else}}
-      <img alt='{{name}}' src='../public/images/No_Image_Available.jpg' />
+    <img alt='{{name}}' src='../public/images/No_Image_Available.jpg' />
     {{/if}}
     <br />
     {{#if website}}
-      <a target='_blank' href={{website}}>
-        Restaurant Information
-      </a>
+    <a target='_blank' href={{website}}>
+      Restaurant Information
+    </a>
     {{else}}
-      <p>
-        N/A
-      </p>
+    <p>
+      N/A
+    </p>
     {{/if}}
     <address>
       Address:
@@ -31,9 +31,9 @@
     </address>
     <p>Price: {{{price}}}</p>
     <p>Average rating:
-    {{#if rating_image}}
+      {{#if rating_image}}
       <img alt={{{name}}} src={{{rating_image}}}>
-    {{/if}}
+      {{/if}}
     </p>
     <p>{{{is_closed}}}</p>
   </div>

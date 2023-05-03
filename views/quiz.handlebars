@@ -42,19 +42,18 @@
       <option value="distance">Distance</option>
     </select>
     <br><br>
-    <input type='submit' value='Submit' class = "submitBtn">
+    <input type='submit' value='Submit' class="submitBtn">
   </form>
   <br />
   <button class="openChat" onclick="openForm2()" id="openChat">Questions?</button>
   <div id="chatbot-quiz-main" class="main"></div>
-    <form id="chatbot-quiz-form" class="popup">
-      <label for="question">Please select your question.</label><br><br>
-      <input type="radio" id="quiz-option1" name="option" value="option1" />How do I use this page?<br><br>
-      <input type="radio" id="quiz-option2" name="option" value="option2" />What if I already know what I want to
-      eat?<br><br>
-      <button onclick="quizQuestion()" class="btn">Ask</button>
-      <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
-      <p id="quiz-answer"></p>
-    </form>
-  </div>
+  <form id="chatbot-quiz-form" class="popup">
+    <label>Please select your question.</label><br><br>
+    <input type="radio" id="quiz-option1" name="option" value="option1" />How do I use this page?<br><br>
+    <input type="radio" id="quiz-option2" name="option" value="option2" />What if I already know what I want to
+    eat?<br><br>
+    <button onclick="quizQuestion()" class="btn">Ask</button>
+    <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
+    <p id="quiz-answer"></p>
+  </form>
 </main>
