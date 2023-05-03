@@ -17,7 +17,7 @@ router.route('/restaurantResults').post(async (req, res) => {
     !req.body.searchLocation ||
     req.body.searchLocation.trim() === ''
   ) {
-    return res.status(400).render('../views/error', {
+    return res.status(400).render('../views/homepage', {
       title: 'Error 400',
       error: 'Error 400: Missing search term.'
     });
@@ -187,9 +187,9 @@ router.route('/restaurantDetails/:id').get(async (req, res) => {
     }
 
     if (is_closed === false) {
-      is_closed = "Is open right now";
+      is_closed = "Currently Open";
     } else { 
-      is_closed = "Is closed right now";
+      is_closed = "Currently Closed";
     }
     
     return res.render('../views/restaurantByID', {

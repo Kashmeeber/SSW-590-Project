@@ -4,16 +4,20 @@ p {
   line-height: 1.5;
 }
 
-h1 {
-  color: crimson;
+main p {
+  text-align: center;
 }
 
-#divColorBorder {
-  border-top: 3px solid silver;
-  border-bottom: 2px solid silver;
-  border-right: 2px solid rosybrown;
-  border-left: 3px solid rosybrown;
+h1 {
+  color: crimson;
+  text-align: center;
 }
+
+#id-form {
+  margin-left: 500px;
+  margin-right: 500px;
+}
+
 
 div {
   text-align: center;
@@ -37,6 +41,8 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  max-width: 350px;
+  max-height: 350px;
 }
 
 input {
@@ -51,6 +57,10 @@ label {
   color: steelblue;
 }
 
+#serverError {
+  color: crimson;
+}
+
 .main {
   border: 2px solid black;
   position: absolute;
@@ -62,9 +72,6 @@ label {
   width: 25%;
 }
 
-#input {
-  text-align: center;
-}
 
 .openChat {
   background-color: #555;
@@ -89,7 +96,7 @@ label {
 }
 
 .popup {
-  /* display: "none"; */
+  visibility: hidden;
   width: 345px;  
   height: 400px;
   padding: 0;  
@@ -125,4 +132,22 @@ label {
 
 #quiz-answer {
   text-align: center
+}
+
+.submitBtn {
+  
+  background-color: cornflowerblue;
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  margin-bottom:5px;
+  position: fixed;
+  left: 30px;
+  opacity: 0.8;
+}
+
+.submitBtn:hover{
+  opacity: 1;
 }

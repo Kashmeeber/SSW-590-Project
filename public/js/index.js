@@ -187,6 +187,7 @@ function quizQuestion() {
 
 function openForm() {
   document.getElementById("chatbot-home-form").style.display = "block";
+  document.getElementById("chatbot-home-form").style.visibility = "visible";
   document.getElementById("openChat").style.display = "none";
 }
 
@@ -197,6 +198,7 @@ function closeForm() {
 
 function openForm2() {
   document.getElementById("chatbot-quiz-form").style.display = "block";
+  document.getElementById("chatbot-quiz-form").style.visibility = "visible";
   document.getElementById("openChat").style.display = "none";
 }
 
