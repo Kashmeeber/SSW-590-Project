@@ -184,3 +184,23 @@ function quizQuestion() {
     });
   }
 }
+
+function openForm() {
+  document.getElementById("chatbot-home-form").style.display = "block";
+  document.getElementById("openChat").style.display = "none";
+}
+
+function closeForm() {
+    document.getElementById("chatbot-home-form").style.display = "none";
+    document.getElementById("openChat").style.display = "block";
+}   
+
+function openForm2() {
+  document.getElementById("chatbot-quiz-form").style.display = "block";
+  document.getElementById("openChat").style.display = "none";
+}
+
+function closeForm2() {
+    document.getElementById("chatbot-quiz-form").style.display = "none";
+    document.getElementById("openChat").style.display = "block";
+} 
